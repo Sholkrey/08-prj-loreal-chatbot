@@ -9,9 +9,15 @@ const systemPrompt = `You are a helpful assistant specialized in L'Or\eacute;al 
 // Conversation history (maintains context across turns)
 const messages = [{ role: "system", content: systemPrompt }];
 
-// Optional variables coming from secrets.js
-// secrets.js may define: const OPENAI_API_KEY = 'sk-...'; (temporary) and const WORKER_URL = 'https://<your-worker>.workers.dev';
-const WORKER = typeof WORKER_URL !== "undefined" ? WORKER_URL : null;
+// Configuration: Set your Worker URL here for GitHub Pages deployment
+// For local development, this can be overridden by secrets.js
+const WORKER_URL_DEFAULT =
+  "https://loreal-chatbot-worker.jnmarsh2005.workers.dev";
+
+// Optional variables coming from secrets.js (for local development)
+// secrets.js may define: const WORKER_URL = 'https://<your-worker>.workers.dev'; to override the default
+const WORKER =
+  typeof WORKER_URL !== "undefined" ? WORKER_URL : WORKER_URL_DEFAULT;
 
 // initial UI greeting
 appendSystemGreeting();
