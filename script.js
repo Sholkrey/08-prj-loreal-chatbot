@@ -14,10 +14,21 @@ const messages = [{ role: "system", content: systemPrompt }];
 const WORKER_URL_DEFAULT =
   "https://loreal-chatbot-worker.jnmarsh2005.workers.dev";
 
-// Optional variables coming from secrets.js (for local development)
-// secrets.js may define: const WORKER_URL = 'https://<your-worker>.workers.dev'; to override the default
-const WORKER =
-  typeof WORKER_URL !== "undefined" ? WORKER_URL : WORKER_URL_DEFAULT;
+// Function to get the worker URL (more reliable than global variables)
+function getWorkerURL() {
+  // Try to use local secrets.js override first
+  if (
+    typeof WORKER_URL !== "undefined" &&
+    WORKER_URL &&
+    !WORKER_URL.includes("REPLACE_ME")
+  ) {
+    return WORKER_URL;
+  }
+  // Fall back to hardcoded default for GitHub Pages
+  return WORKER_URL_DEFAULT;
+}
+
+const WORKER = getWorkerURL();
 
 // initial UI greeting
 appendSystemGreeting();
