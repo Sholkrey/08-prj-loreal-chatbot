@@ -1,2 +1,18 @@
 # Secrets file containing API keys
 secrets.js
+*.env
+.env*
+
+# Node modules (if using npm/wrangler)
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log
