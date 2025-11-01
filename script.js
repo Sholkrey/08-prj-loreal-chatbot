@@ -72,12 +72,13 @@ chatForm.addEventListener("submit", async (e) => {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   // Send to Cloudflare Worker endpoint
+  console.log("WORKER URL:", WORKER); // Debug log
   if (!WORKER || WORKER.includes("REPLACE_ME")) {
     // Remove thinking
     thinking.remove();
     appendMessage(
       "ai",
-      "Worker endpoint not configured. Please set WORKER_URL in secrets.js to your deployed Cloudflare Worker URL."
+      `Worker endpoint not configured. WORKER = "${WORKER}". Please check your configuration.`
     );
     return;
   }
